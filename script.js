@@ -10,7 +10,7 @@ window.raf = (function(){
     height          : "600",
     colNum          : 3,
     rowNum          : 9,
-    winRate         : 50,
+    winRate         : 10,
     autoPlay        : false,
     autoSize        : false,
     autoPlayTime    : 5,
