@@ -62,7 +62,8 @@
   background-position: center;
   background-size: cover;
 }
-.seven:after      {background-image : url("./seven.svg");}
+
+.seven:after      {background-image : url("./seven.svg");}*
 .lemon:after      {background-image : url("./lemon.svg");}
 .cherry:after     {background-image : url("./cherry.svg");}
 .watermelon:after {background-image : url("./waterMelon.svg");}
@@ -71,7 +72,7 @@
 .prune:after      {background-image : url("./prune.svg");}
 .bigwin:after     {background-image : url("./bigwin.svg");}
 .orange:after     {background-image : url("./orange.svg");}
-.seven:after      {background-image : url(//bannerflow.blob.core.windows.net/resources/seven-6803e6a7-66bb-475d-b201-e2551ac41f77.svg?v=636058905940602803);}
+.seven:after      {background-image : url(//bannerflow.blob.core.windows.net/resources/seven-6803e6a7-66bb-475d-b201-e2551ac41f77.svg?v=636058905940602803);}*
 .lemon:after      {background-image : url(//bannerflow.blob.core.windows.net/resources/lemon-427191a8-0a28-43fb-8bf9-6a68df0d8d0d.svg?v=636058905940602803);}
 .cherry:after     {background-image : url(//bannerflow.blob.core.windows.net/resources/cherry-73d79a68-bece-46b2-9f93-fcc4617b6dbc.svg?v=636058905940602803);}
 .watermelon:after {background-image : url(//bannerflow.blob.core.windows.net/resources/watermelon-53668bfb-8cd0-4107-b9be-b2379984b9fb.svg?v=636058905940602803);}

@@ -1,0 +1,42 @@
+
+*{
+    padding: 0;
+    margin: 0;
+}
+
+
+.credit-section {
+    background: linear-gradient(45deg, rgb(61, 7, 7), rgb(180, 174, 180));
+    border-radius: 8px;
+    padding: 10px;
+    margin: 20px auto;
+    width: 80%;
+    max-width: 400px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+    color: #fff;
+    text-align: center;
+}
+
+.credit-info {
+    margin: 10px 0;
+    font-size: 20px;
+    font-family: 'Digital-7', sans-serif;
+}
+
+.credit-info span {
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+#credits, #bet, #winner-paid {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 5px;
+}
+
+@font-face {
+    font-family: 'Digital-7';
+    src: url('https://example.com/fonts/digital-7.ttf');
+}
+

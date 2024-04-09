@@ -1,4 +1,5 @@
 var fps           = 60;
+
 window.raf = (function(){
   return requestAnimationFrame || webkitRequestAnimationFrame || mozRequestAnimationFrame || function(c){setTimeout(c,1000/fps);};
 })();
@@ -6,11 +7,11 @@ window.raf = (function(){
 (function() {
   var NAME        = "SlotMachine",
   defaultSettings = {
-    width           : "600",
-    height          : "600",
+    width           : "500",
+    height          : "500",
     colNum          : 3,
     rowNum          : 9,
-    winRate         : 50,
+    winRate         : 40,
     autoPlay        : false,
     autoSize        : false,
     autoPlayTime    : 5,
@@ -47,9 +48,28 @@ window.raf = (function(){
     this.rotateHandle = this.rotateHandle.bind(this);
     this.colArr = [];
     this.options = {};
+    this.credits = 250; // Starting credits
+    this.bet = 10; // Initial bet
+    this.winnerPaid = 0; // Initial winner paid
+
+    // Bind new method
+    this.updateCreditDisplay = this.updateCreditDisplay.bind(this);
+
+    // Call to update the display at initialization
+    this.updateCreditDisplay();
   }
+  SlotMachine.prototype.updateCreditDisplay = function() {
+    document.getElementById('credits').textContent = this.credits;
+    document.getElementById('bet').textContent = this.bet;
+    document.getElementById('winner-paid').textContent = this.winnerPaid;
+};
   SlotMachine.prototype.beforeRun = function(){    
     if (completed) {
+      // Deduct bet from credits when the game starts
+      this.credits -= this.bet;
+
+      // Call to update the display
+      this.updateCreditDisplay();
       this.showWin(false);
       completed = false;
       var result = null;
@@ -73,6 +93,11 @@ window.raf = (function(){
       }
     }
     if(win){
+      this.winnerPaid = this.bet; // This should be calculated based on the actual win
+        this.credits += this.winnerPaid;
+
+        // Call to update the display
+        this.updateCreditDisplay();
       this.showWin(true);
       setTimeout(function(){
         this.showWin(false);
