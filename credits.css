@@ -6,20 +6,21 @@
 
 
 .credit-section {
-    background: linear-gradient(45deg, rgb(61, 7, 7), rgb(180, 174, 180));
+    background: linear-gradient(45deg, #f22, #f2f);
     border-radius: 8px;
     padding: 10px;
     margin: 20px auto;
     width: 80%;
-    max-width: 400px;
+    max-width: 600px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
     color: #fff;
+    display: flex;
+    justify-content: space-around;
     text-align: center;
 }
 
 .credit-info {
-    margin: 10px 0;
-    font-size: 20px;
+    font-size: 18px;
     font-family: 'Digital-7', sans-serif;
 }
 
@@ -33,6 +34,7 @@
     background: rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     padding: 5px;
+    min-width: 80px; /* Ensure consistent width */
 }
 
 @font-face {
