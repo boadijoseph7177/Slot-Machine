@@ -1,11 +1,22 @@
 
 <html>
 	<head>
-
+		<title>RockinReels</title>
 		<link rel="stylesheet" type="text/css" href="style.css">
-		<link rel="stylesheet" type="text/css" href="credits.css">				
+		<link rel="stylesheet" type="text/css" href="credits.css">
+		<link rel="stylesheet" type="text/css" href="paytable.css">			
+			
+		<audio id="reelSound" preload="auto">
+			<source src="sounds/115091__milton__slot-7.mp3" type="audio/mpeg">
+			Your browser does not support the audio element.
+		</audio>
+		<audio id="creditcount" preload="auto">
+			<source src="sounds/118237__pierrecartoons1979__major-7-slot-machine.mp3" type="audio/mpeg">
+			Your browser does not support the audio element.
+		</audio>	
 	</head>
 	<body>
+
 		<div class="machine">
 			<div class="container">
 				<div class="winner">
@@ -23,10 +34,87 @@
 			</div>
 			<div class="credit-info">
 				<span>Winner Paid </span><span id="winner-paid">0</span>
-			</div>
-			
+			</div>	
 		 </div>
-		 
+		 <button id="soundToggle" class="sound-toggle">Toggle Sound</button>
+		 <button id="viewPayTable" class="view-table">View PayTable</button>
+		 <div id="payTableSection" class="PayTable">
+			<table>
+
+				<tr>
+					<th class="combi">Combinations (bet = 10 credits)</th>
+					<th class="payout">Payout</th>
+				</tr>
+				<tr>
+					<td>
+						<img src="icons/rockstar.webp" alt="Rockstar">
+						<img src="icons/rockstar.webp" alt="Rockstar">
+						<img src="icons/rockstar.webp" alt="Rockstar">
+					</td>
+					<td class="payout-value">100</td>
+				</tr>
+				<tr>
+					<td>
+						<img src="icons/seven.webp" alt="Seven">
+						<img src="icons/seven.webp" alt="Seven">
+						<img src="icons/seven.webp" alt="Seven">
+					</td>
+					<td class="payout-value">50</td>
+				</tr>
+				<tr>
+					<td>
+						<img src="icons/guitar.webp" alt="Guitar">
+						<img src="icons/guitar.webp" alt="Guitar">
+						<img src="icons/guitar.webp" alt="Guitar">
+					</td>
+					<td class="payout-value">30</td>
+				</tr>
+				<tr>
+					<td>
+						<img src="icons/cherry.webp" alt="Cherry">
+						<img src="icons/cherry.webp" alt="Cherry">
+						<img src="icons/cherry.webp" alt="Cherry">
+					</td>
+					<td class="payout-value">30</td>
+				</tr>
+				<tr>
+					<td>
+						
+						<img src="icons/drumset..webp" alt="Drumset">
+						<img src="icons/drumset..webp" alt="Drumset">
+						<img src="icons/drumset..webp" alt="Drumset">
+					</td>
+					<td class="payout-value">30</td>
+				</tr>
+				<tr>
+					<td>
+						<img src="icons/mic.webp" alt="Mic">
+						<img src="icons/mic.webp" alt="Mic">
+						<img src="icons/mic.webp" alt="Mic">
+					</td>
+					<td class="payout-value">30</td>
+				</tr>
+				<tr>
+					<td>
+						<img src="icons/headphone.webp" alt="Headphone">
+						<img src="icons/headphone.webp" alt="Headphone">
+						<img src="icons/headphone.webp" alt="Headphone">
+					</td>
+					<td class="payout-value">30</td>
+				</tr>
+				<tr>
+					<td>
+						<img src="icons/vinyl.webp" alt="Vinyl">
+						<img src="icons/vinyl.webp" alt="Vinyl">
+						<img src="icons/vinyl.webp" alt="Vinyl">
+						
+					</td>
+					<td class="payout-value">50</td>
+				</tr>
+
+			</table>
+		</div>
+		
 		<style scope id="setting"></style>
 		<style scope id="update"></style>
 		<script type="text/javascript" src="script.js"></script>

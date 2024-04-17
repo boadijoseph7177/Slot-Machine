@@ -6,7 +6,7 @@
 
 
 .credit-section {
-    background: linear-gradient(45deg, #f22, #f2f);
+    background: linear-gradient(45deg, rgb(158, 100, 100), rgb(211, 40, 211));
     border-radius: 8px;
     padding: 10px;
     margin: 20px auto;

@@ -1,0 +1,55 @@
+
+.PayTable {
+    padding: 20px;
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    background-color: #4f3333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.PayTable th {
+    color: rgb(87, 189, 53);
+    font-size: 25px;
+    background-color: #290c70;
+}
+
+.PayTable table {
+    width: 50%;
+    border-collapse: collapse;
+}
+.PayTable img {
+    height: 70px; /* Adjust based on your preference */
+    width: auto;
+    margin-right: 5px; /* Space between symbols */
+}
+.PayTable th, .PayTable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+.payout-value{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height: 90px;
+    font-size: 25px; /* Larger font size for better visibility */
+    font-weight: bold; /* Make the numbers bold */
+    color: #c6aaaa; /* Bright color for better attention */
+    text-align: center; /* Center align the text in the cell */
+    padding: 10px; /* Add some padding for spacing */
+    background-color: #120f0f; /* Light background color to make it pop */
+    border-radius: 5px; /* Slightly rounded corners for a smooth look */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+}
+@media screen and (max-width: 600px) {
+    .PayTable img {
+        height: 30px; /* Smaller size for mobile */
+    }
+}
+@media (max-width: 768px) {
+    .payout-value {
+        font-size: 16px; /* Slightly smaller font size on smaller devices */
+        padding: 5px; /* Less padding to fit smaller screens */
+    }
+}

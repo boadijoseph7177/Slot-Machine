@@ -7,13 +7,13 @@ window.raf = (function(){
 (function() {
   var NAME        = "SlotMachine",
   defaultSettings = {
-    width           : "500",
+    width           : "600",
     height          : "500",
     colNum          : 3,
     rowNum          : 9,
-    winRate         : 100,
+    winRate         : 20,
     autoPlay        : false,
-    autoSize        : false,
+    autoSize        : true,
     autoPlayTime    : 5,
     layout          : 'compact',
     handleShow      : true,
@@ -48,7 +48,7 @@ window.raf = (function(){
     this.rotateHandle = this.rotateHandle.bind(this);
     this.colArr = [];
     this.options = {};
-    this.credits = 250; // Starting credits
+    this.credits = 260; // Starting credits
     this.bet = 10; // Initial bet
     this.winnerPaid = 0; // Initial winner paid
 
@@ -93,17 +93,50 @@ window.raf = (function(){
       }
     }
     if(win){
-      this.winnerPaid = this.bet; // This should be calculated based on the actual win
-        this.credits += this.winnerPaid;
-
-        // Call to update the display
-        this.updateCreditDisplay();
       this.showWin(true);
-      setTimeout(function(){
-        this.showWin(false);
-      }.bind(this),this.options.autoPlayTime*1000);
-    }
-  }
+      if (results.every(val => val === 'bigwin')){
+        this.winnerPaid = this.bet * 10;
+      }
+      else if (results.every(val => val === 'seven')){
+        this.winnerPaid = this.bet * 5;
+      }
+      else if (results.every(val => val === 'prune')){
+        this.winnerPaid = this.bet * 5;
+      }
+      else {
+      this.winnerPaid = this.bet*3; }// This should be calculated based on the actual win
+      
+      let increments = 10; // Number of increments to display the counting
+      let incrementAmount = this.winnerPaid / increments;
+      let count = 0;
+
+      var creditSound = document.getElementById('creditcount');
+      creditSound.play();
+      //this.credits += this.winnerPaid;
+
+      // Play the credit adding sound
+      var creditSound = document.getElementById('creditcount');
+      creditSound.play();
+
+      // Increment credits with a delay to sync with sound
+      var intervalId = setInterval(() => {
+        this.credits += incrementAmount;
+        count++;
+        this.updateCreditDisplay();
+
+        if (count >= increments) {
+          clearInterval(intervalId);
+          creditSound.pause();
+          creditSound.currentTime = 0; // Reset the sound to the start
+          setTimeout(() => {
+              this.showWin(false);
+          }, this.options.autoPlayTime * 1000);
+      }
+  }, 100);
+}
+
+};
+    
   SlotMachine.prototype.rotateHandle = function(){
     var handle = document.querySelector(".handle");
     if (handle) {
@@ -113,15 +146,30 @@ window.raf = (function(){
       },1000); 
     }
   }
+
+
   SlotMachine.prototype.run = function(){    
-    var done = true;    
+    var done = true;   
+    var reelSound = document.getElementById('reelSound');
+    reelSound.play(); 
     for(var i=0;i<this.options.colNum;i++){
       done &= this.colArr[i].run();
     }
     if (!done) raf(this.run)
-    else this.afterRun();
+    else {
+    this.afterRun();
+    reelSound.pause();
+    reelSound.currentTime = 0;
+    }
   }
-
+  document.getElementById('soundToggle').addEventListener('click', function() {
+    var sounds = document.querySelectorAll('audio');
+    var isMuted = sounds[0] && sounds[0].muted;  // Check the current state based on the first audio element
+    Array.prototype.forEach.call(sounds, function(sound) {
+        sound.muted = !isMuted;  // Toggle the state
+    });
+    this.textContent = isMuted ? "Unmute Sound" : "Mute Sound";  // Update button text accordingly
+});
   SlotMachine.prototype.showWin = function(show){
     var winner = document.querySelector(".winner");
     if (winner) winner.className= show ? "winner active" : "winner";
@@ -227,7 +275,8 @@ window.raf = (function(){
         //clearTimeout(timer);
         //timer = setTimeout(function(){that.init(BannerFlow);that.beforeRun()},500)
       });
-      if (supportTouch) {
+      
+      /*if (supportTouch) {
         window.addEventListener("touchstart",function(){
           that.beforeRun();
         });
@@ -236,6 +285,14 @@ window.raf = (function(){
           that.beforeRun();
         });
       }
+      */
+      var handle = document.querySelector(".handle");
+if (handle) {
+    handle.addEventListener('click', function(event) {
+        event.stopPropagation();
+        that.beforeRun();
+    });
+}
     }
     var slotTrigger = document.querySelector("#slot-trigger");
     if (slotTrigger) {
