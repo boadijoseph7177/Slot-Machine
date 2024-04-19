@@ -7,11 +7,15 @@ window.raf = (function(){
 (function() {
   var NAME        = "SlotMachine",
   defaultSettings = {
-    width           : "600",
-    height          : "500",
+    width           : "700",
+    height          : "600",
     colNum          : 3,
     rowNum          : 9,
-    winRate         : 20,
+    winRate         : 30,
+    minBet          : 10,
+    maxBet          : 30,
+    betIncrement    : 10,
+    bet             : 10, 
     autoPlay        : false,
     autoSize        : true,
     autoPlayTime    : 5,
@@ -51,17 +55,46 @@ window.raf = (function(){
     this.credits = 260; // Starting credits
     this.bet = 10; // Initial bet
     this.winnerPaid = 0; // Initial winner paid
+    this.increaseBet = this.increaseBet.bind(this);
+    this.decreaseBet = this.decreaseBet.bind(this);
+    this.updateCreditDisplay = this.updateCreditDisplay.bind(this);
 
     // Bind new method
     this.updateCreditDisplay = this.updateCreditDisplay.bind(this);
 
     // Call to update the display at initialization
     this.updateCreditDisplay();
+
+    this.setupListeners();
   }
+
+  SlotMachine.prototype.setupListeners = function() {
+    var self = this;
+    document.getElementById('betIncrease').addEventListener('click', function() {
+        self.increaseBet();
+    });
+
+    document.getElementById('betDecrease').addEventListener('click', function() {
+        self.decreaseBet();
+    });
+};
   SlotMachine.prototype.updateCreditDisplay = function() {
     document.getElementById('credits').textContent = this.credits;
     document.getElementById('bet').textContent = this.bet;
     document.getElementById('winner-paid').textContent = this.winnerPaid;
+};
+SlotMachine.prototype.increaseBet = function() {
+  if (this.bet < this.options.maxBet) {
+      this.bet += this.options.betIncrement;
+      this.updateCreditDisplay();
+  }
+};
+
+SlotMachine.prototype.decreaseBet = function() {
+  if (this.bet > this.options.minBet) {
+      this.bet -= this.options.betIncrement;
+      this.updateCreditDisplay();
+  }
 };
   SlotMachine.prototype.beforeRun = function(){    
     if (completed) {
@@ -147,7 +180,13 @@ window.raf = (function(){
     }
   }
 
-
+  document.getElementById('viewPayTable').addEventListener('click', function() {
+    var payTableSection = document.getElementById('payTableSection');
+    if (payTableSection) {
+        payTableSection.scrollIntoView({ behavior: 'smooth' });
+    }
+});
+  
   SlotMachine.prototype.run = function(){    
     var done = true;   
     var reelSound = document.getElementById('reelSound');
@@ -173,6 +212,12 @@ window.raf = (function(){
   SlotMachine.prototype.showWin = function(show){
     var winner = document.querySelector(".winner");
     if (winner) winner.className= show ? "winner active" : "winner";
+
+    // Update the display of winner-paid based on the 'show' flag
+    var winnerPaidDisplay = document.getElementById('winner-paid');
+    if (winnerPaidDisplay) {
+        winnerPaidDisplay.style.display = show ? "block" : "none"; // Toggle display
+    }
   }
   SlotMachine.prototype.init = function(){
     //reset all
@@ -187,6 +232,7 @@ window.raf = (function(){
     for(var key in defaultSettings) {
       this.options[key] = defaultSettings[key];
     }
+    
     if (BannerFlow!==undefined){
       var settings = BannerFlow.settings;
       this.options.winRate = settings.winRate ? settings.winRate : defaultSettings.winRate;
@@ -254,6 +300,7 @@ window.raf = (function(){
       document.querySelector(".container").appendChild(col.getDOM());
     }
     machine.style.opacity = "1";
+    
   }
 
   SlotMachine.prototype.addListener = function(){
@@ -276,16 +323,7 @@ window.raf = (function(){
         //timer = setTimeout(function(){that.init(BannerFlow);that.beforeRun()},500)
       });
       
-      /*if (supportTouch) {
-        window.addEventListener("touchstart",function(){
-          that.beforeRun();
-        });
-      } else {
-        window.addEventListener("click",function(){
-          that.beforeRun();
-        });
-      }
-      */
+      
       var handle = document.querySelector(".handle");
 if (handle) {
     handle.addEventListener('click', function(event) {

@@ -218,7 +218,7 @@
   transform: translateY(85px);
 }
 .sound-toggle {
-  position: fixed; /* or absolute, depending on layout */
+  position: absolute; /* or absolute, depending on layout */
   top: 20px;
   right: 20px;
   padding: 10px 20px;
@@ -235,19 +235,19 @@
 }
 
 .sound-toggle:hover {
-  background-color: #0e100e; /* Darker shade of button color for hover */
+  background-color: #9f9ea5; /* Darker shade of button color for hover */
   box-shadow: 0 4px 8px rgba(0,0,0,0.3);
   transform: translateY(-2px); /* Slight raise effect */
 }
 
 .sound-toggle:active {
-  background-color: #3b423c; /* Even darker for click effect */
+  background-color: #b0afb7; /* Even darker for click effect */
   box-shadow: 0 2px 4px rgba(0,0,0,0.3);
   transform: translateY(1px); /* Simulate button press */
 }
 
 .view-table {
-  position: fixed;
+  position: absolute;
   top: 50px;
   right: 20px;
   padding: 10px 20px;
